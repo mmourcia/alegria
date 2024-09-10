@@ -1,0 +1,19 @@
+[Unit]
+Description=Alegria 777 game Service
+After=network.target
+
+[Service]
+ExecStart=python3 /home/alegria/alegria/game.py
+WorkingDirectory=/home/alegria/alegria
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=alegria
+Environment=PYTHONUNBUFFERED=1
+KillMode=process
+TimeoutStopSec=10
+ExecStop=/bin/kill -s SIGINT $MAINPID
+
+
+[Install]
+WantedBy=multi-user.target

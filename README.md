@@ -103,7 +103,7 @@ sudo systemctl start hostapd dnsmasq
 
 ```
 sudo apt install git python3-yaml python3-pip python3-gpiozero python3-pygame
-``
+```
 
 ```
 sudo cp contrib/alegria.service /etc/systemd/system/

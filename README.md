@@ -36,13 +36,16 @@ Il s'agit d'un jeu de 777 "humain" avec quelques effets lumineux et sonores.
 
 ### Boite à boutons
 
+![boite](./img/boite-bouttons.png)
+
+
 | Bouton        | GPIO | Fonction                                                     |
 | ------------- | ---- | ------------------------------------------------------------ |
 | Rouge         | 17   | Déclenchement d'une animation WLED rouge + sons associés     |
 | Bleu          | 4    | Déclenchement d'une animation WLED bleue + sons associés     |
 | Jaune         | 27   | Déclenchement d'une animation WLED jaune + sons associés     |
-| Pédale Succès | ??   | Déclencement d'une animation WLED de succès + sons associés  |
-| Pédale Echec  | ??   | Déclencement d'une animation WLED d'echec  + sons associés   |
+| Pédale Succès | 23   | Déclencement d'une animation WLED de succès + sons associés  |
+| Pédale Echec  | 24   | Déclencement d'une animation WLED d'echec  + sons associés   |
 
 ## Logiciels
 

@@ -1,6 +1,7 @@
 [Unit]
 Description=Alegria 777 game Service
-After=network.target
+After=network-online.target
+Before=halt.target reboot.target shutdown.target poweroff.target
 
 [Service]
 ExecStart=python3 /home/alegria/alegria/game.py
@@ -17,3 +18,4 @@ ExecStop=/bin/kill -s SIGINT $MAINPID
 
 [Install]
 WantedBy=multi-user.target
+WantedBy=halt.target reboot.target shutdown.target poweroff.target

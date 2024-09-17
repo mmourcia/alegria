@@ -63,41 +63,30 @@ Cela permet à l'ensemble de fonctionner sans pré-requis sur place.
 Le SSID monté par le RPI est : "banditmanchot" mais il est caché. 
 
 ```sh
-sudo apt update
-sudo apt install hostapd dnsmasq
+sudo nmcli dev wifi hotspot ifname wlan0 ssid banditmanchot password jesusrevient
 ```
 
-**hostap**
-
-```
-$ cat /etc/hostapd/hostapd.conf 
-interface=wlan0
-driver=nl80211
-ssid=banditmanchot
-hw_mode=g
-channel=7
-wmm_enabled=0
-macaddr_acl=0
-auth_algs=1
-ignore_broadcast_ssid=0
-wpa=2
-wpa_passphrase=JesusrevientparmilessienS
-wpa_key_mgmt=WPA-PSK
-wpa_pairwise=TKIP
-rsn_pairwise=CCMP
-ignore_broadcast_ssid=1
+```sh
+$ nmcli connection show
+NAME           UUID                                  TYPE      DEVICE 
+preconfigured  e0698bcc-307b-4008-8467-273b2787a0f7  wifi      wlan0  
+lo             fccb0b26-68a2-4f85-96df-21324d617698  loopback  lo     
+Hotspot        9d1cf409-2073-495d-9068-0f9b8c476b81  wifi      --   
 ```
 
-**dnsmasq**
+Puis supprimer l'autoconnect sur la connexion wifi de base 
+
+```sh
+sudo nmcli connection modify preconfigured connection.autoconnect no
+```
+
+
+Puis adresse ipv4 statique : /etc/NetworkManager/system-connections/Hotspot.nmconnection
 
 ```
-interface=wlan0
-dhcp-range=192.168.147.2,192.168.147.5,255.255.255.0,24h
-```
-
-```
-sudo systemctl enable hostapd dnsmasq
-sudo systemctl start hostapd dnsmasq
+[ipv4]
+method=manual
+addresses1=192.168.147.1/24
 ```
 
 ### Programme principal sur le raspberry

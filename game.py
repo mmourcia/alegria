@@ -22,9 +22,9 @@ win_sounds = [os.path.join(sound_folder_win, file) for file in os.listdir(sound_
 lose_sounds = [os.path.join(sound_folder_lose, file) for file in os.listdir(sound_folder_lose) if file.endswith('.wav')]
 
 # Define the buttons and the pins they're connected to
-button_blue = Button(4, pull_up=True, bounce_time=0.2)    # GPIO 4 for blue button
-button_red = Button(17, pull_up=True, bounce_time=0.2)    # GPIO 17 for red button
-button_yellow = Button(27, pull_up=True, bounce_time=0.2) # GPIO 27 for yellow button
+button_blue = Button(27, pull_up=True, bounce_time=0.2)    # GPIO 4 for blue button
+button_red = Button(22, pull_up=True, bounce_time=0.2)    # GPIO 17 for red button
+button_yellow = Button(17, pull_up=True, bounce_time=0.2) # GPIO 27 for yellow button
 button_win = Button(23, pull_up=True, bounce_time=0.2)    # GPIO 23 for pédale gagnée
 button_lose = Button(24, pull_up=True, bounce_time=0.2)   # GPIO 24 for pédale perdue
 

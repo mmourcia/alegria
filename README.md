@@ -2,7 +2,7 @@
 
 ## Contexte
 
-Il s'agit d'un jeu de 777 "humain" avec quelques effets lumineux et sonores.  
+Il s'agit d'un jeu de bandit manchot "humain" avec quelques effets lumineux et sonores.  
 
 ![Le concept](./img/concept.png)
 

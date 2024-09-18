@@ -56,48 +56,40 @@ Il s'agit d'un jeu de bandit manchot "humain" avec quelques effets lumineux et s
 
 ![usbsoundcardselect.png](./img/usbsoundcardselect.png)
 
+On fait en sorte que le raspberry puisse être éteint/allumé avec un bouton physique connecté aux broches 5 et 6.  
+
+```sh
+sudo echo "dtoverlay=gpio-shutdown" >> /boot/firmware/config.txt
+sudo reboot
+```
+
 ### Réseau
 
 Le raspberry pi 0 met à disposition un access point sur lequel l'ESP32 se connecte.  
 Cela permet à l'ensemble de fonctionner sans pré-requis sur place.  
-Le SSID monté par le RPI est : "banditmanchot" mais il est caché. 
+Le SSID monté par le RPI est : "banditmanchot".
 
 ```sh
-sudo nmcli dev wifi hotspot ifname wlan0 ssid banditmanchot password jesusrevient
-```
-
-```sh
-$ nmcli connection show
-NAME           UUID                                  TYPE      DEVICE 
-preconfigured  e0698bcc-307b-4008-8467-273b2787a0f7  wifi      wlan0  
-lo             fccb0b26-68a2-4f85-96df-21324d617698  loopback  lo     
-Hotspot        9d1cf409-2073-495d-9068-0f9b8c476b81  wifi      --   
-```
-
-Puis supprimer l'autoconnect sur la connexion wifi de base 
-
-```sh
-sudo nmcli connection modify preconfigured connection.autoconnect no
-```
-
-
-Puis adresse ipv4 statique : /etc/NetworkManager/system-connections/Hotspot.nmconnection
-
-```
-[ipv4]
-method=manual
-addresses1=192.168.147.1/24
+sudo nmcli connection add type wifi ifname wlan0 con-name hotspot autoconnect yes ssid banditmanchot
+sudo nmcli connection modify hotspot 802-11-wireless.mode ap 802-11-wireless.band bg ipv4.method shared
+sudo nmcli connection modify hotspot wifi-sec.key-mgmt wpa-psk
+sudo nmcli connection modify hotspot wifi-sec.psk jesusrevient
+sudo nmcli connection down preconfigured
+sudo nmcli connection up hotspot
 ```
 
 ### Programme principal sur le raspberry
 
 **Installation**
 
-```
+```sh
+sudo apt update
 sudo apt install git python3-yaml python3-pip python3-gpiozero python3-pygame
 ```
 
-```
+```sh
+git clone https://github.com/mmourcia/alegria.git
+cd alegria
 sudo cp contrib/alegria.service /etc/systemd/system/
 sudo chmod 644 /etc/systemd/system/alegria.service 
 sudo systemctl daemon-reload
